@@ -16,9 +16,9 @@ The VM needs to have the following installed:
 1. The "kubectl" interface installed via "az"
 1. Helm
 
-Instructions to install and test all of these are below:
+Instructions to install and test all of these are below.
 
-### git
+### git
 
 Install
 
@@ -38,7 +38,7 @@ LICENSE   README.md  etc. etc.
 (this should result in the contents of this GitHub repository being
  downloaded into the local k8s_jupyter_workshop directory)
 
-### Anaconda python
+### Anaconda python
 
 We need a Python that includes Jupyter. The easiest way to do this is to use
 anaconda python. Install this using
@@ -50,7 +50,26 @@ anaconda python. Install this using
 ```
 
 This should unpack the installer and ask you where you want to install
-anaconda python. 
+anaconda python. Accept the default installation directory of 
+`/home/workshops/anaconda3`. Anaconda will install into this directory.
+
+To test, run
+
+```
+# ~/anaconda/bin/jupyter-notebook
+```
+
+This should print out a lot to the screen showing that Jupyter is starting, 
+and then it will launch a web browser with a Jupyter file dialog.
+
+You can close the web browser and use "CTRL+C" to shut down the 
+Jupyter server.
+
+Once anaconda has installed and you are happy, you can delete the installer
+
+```
+# rm Anaconda3-5.2.0-Linux-x86_64.sh
+```
 
 ### Docker
 
