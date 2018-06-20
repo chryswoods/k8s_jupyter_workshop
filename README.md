@@ -144,7 +144,7 @@ For more examples and ideas, visit:
 
 and you should see the output as printed below the command.
 
-## Microsoft "az" command line interface
+## Microsoft "az" command line interface
 
 We will install following the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
 
@@ -321,7 +321,7 @@ Use "kubectl options" for a list of global command-line options (applies to all
 commands).
 ```
 
-## Helm
+## Helm
 
 The final step is to install helm, following the instructions from 
 [here](https://github.com/kubernetes/helm/blob/master/docs/install.md)
@@ -419,5 +419,16 @@ the git clone command above)
 ```
 # ~/anaconda3/bin/python test_workshop.py
 
+Tesing git...  PASS
+Testing jupyter...  PASS
+Testing docker...  PASS
+Testing az...  PASS
+Testing kubectl...  PASS
+Testing helm...  PASS
+
+Success. Looks like everything has installed correctly :-)
 ```
+
+Hopefully you will see the "Success" message. If not, check the instructions
+above or send me an [email](mailto:chryswoods@gmail.com)
 
