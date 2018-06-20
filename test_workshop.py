@@ -45,14 +45,6 @@ else:
     sys.stdout.write(" FAIL\n")
     nfailed += 1
 
-sys.stdout.write("Testing kubectl... ")
- 
-if os.system("kubectl help > /dev/null 2>&1") == 0:
-    sys.stdout.write(" PASS\n")
-else:
-    sys.stdout.write(" FAIL\n")
-    nfailed += 1
-
 sys.stdout.write("Testing helm... ")
 
 if os.system("helm help > /dev/null 2>&1") == 0:
