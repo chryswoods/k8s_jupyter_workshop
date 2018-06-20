@@ -147,4 +147,178 @@ We will install following the instructions [here](https://docs.microsoft.com/en-
 # sudo apt-get update && sudo apt-get install azure-cli
 ```
 
+To test, run the command `az`, which should result in something similar to;
 
+```
+# az
+
+     /\
+    /  \    _____   _ _ __ ___
+   / /\ \  |_  / | | | \'__/ _ \
+  / ____ \  / /| |_| | | |  __/
+ /_/    \_\/___|\__,_|_|  \___|
+
+
+Welcome to the cool new Azure CLI!
+
+Here are the base commands:
+
+    account          : Manage Azure subscription information.
+    acr              : Manage Azure Container Registries.
+    acs              : Manage Azure Container Services.
+    ad               : Synchronize on-premises directories and manage Azure Active Directory
+                       resources.
+    advisor          : (PREVIEW) Manage Azure Advisor.
+    aks              : Manage Kubernetes clusters.
+    appservice       : Manage App Service plans.
+    backup           : Commands to manage Azure Backups.
+    batch            : Manage Azure Batch.
+    batchai          : Batch AI.
+    billing          : Manage Azure Billing.
+    cdn              : Manage Azure Content Delivery Networks (CDNs).
+    cloud            : Manage registered Azure clouds.
+    cognitiveservices: Manage Azure Cognitive Services accounts.
+    configure        : Display and manage the Azure CLI 2.0 configuration. This command is
+                       interactive.
+    consumption      : Manage consumption of Azure resources.
+    container        : (PREVIEW) Manage Azure Container Instances.
+    cosmosdb         : Manage Azure Cosmos DB database accounts.
+    disk             : Manage Azure Managed Disks.
+    dla              : (PREVIEW) Manage Data Lake Analytics accounts, jobs, and catalogs.
+    dls              : (PREVIEW) Manage Data Lake Store accounts and filesystems.
+    eventgrid        : Manage Azure Event Grid topics and subscriptions.
+    extension        : Manage and update CLI extensions.
+    feature          : Manage resource provider features.
+    feedback         : Loving or hating the CLI?  Let us know!
+    find             : Find Azure CLI commands.
+    functionapp      : Manage function apps.
+    group            : Manage resource groups and template deployments.
+    identity         : Managed Service Identities.
+    image            : Manage custom virtual machine images.
+    interactive      : Start interactive mode.
+    iot              : (PREVIEW) Manage Internet of Things (IoT) assets.
+    keyvault         : Safeguard and maintain control of keys, secrets, and certificates.
+    lab              : Manage Azure DevTest Labs.
+    lock             : Manage Azure locks.
+    login            : Log in to Azure.
+    logout           : Log out to remove access to Azure subscriptions.
+    managedapp       : Manage template solutions provided and maintained by Independent Software
+                       Vendors (ISVs).
+    monitor          : Manage the Azure Monitor Service.
+    mysql            : Manage Azure Database for MySQL servers.
+    network          : Manage Azure Network resources.
+    policy           : Manage resource policies.
+    postgres         : Manage Azure Database for PostgreSQL servers.
+    provider         : Manage resource providers.
+    redis            : Access to a secure, dedicated Redis cache for your Azure applications.
+    reservations     : Manage Azure Reservations.
+    resource         : Manage Azure resources.
+    role             : Manage user roles for access control with Azure Active Directory and service
+                       principals.
+    sf               : Manage and administer Azure Service Fabric clusters.
+    snapshot         : Manage point-in-time copies of managed disks, native blobs, or other
+                       snapshots.
+    sql              : Manage Azure SQL Databases and Data Warehouses.
+    storage          : Manage Azure Cloud Storage resources.
+    tag              : Manage resource tags.
+    vm               : Provision Linux or Windows virtual machines.
+    vmss             : Manage groupings of virtual machines in an Azure Virtual Machine Scale Set
+                       (VMSS).
+    webapp           : Manage web apps.
+```
+
+## kubectl interface via az
+
+Next we need to install kubectl using az. Type
+
+```
+# sudo az aks install-cli
+```
+
+If this works, you should see kubectl being installed. You can type by
+typing `kubectl` and seeing if the following is printed
+
+```
+# kubectl
+
+kubectl controls the Kubernetes cluster manager. 
+
+Find more information at https://github.com/kubernetes/kubernetes.
+
+Basic Commands (Beginner):
+  create         Create a resource from a file or from stdin.
+  expose         Take a replication controller, service, deployment or pod and
+expose it as a new Kubernetes Service
+  run            Run a particular image on the cluster
+  set            Set specific features on objects
+  run-container  Run a particular image on the cluster. This command is
+deprecated, use "run" instead
+
+Basic Commands (Intermediate):
+  get            Display one or many resources
+  explain        Documentation of resources
+  edit           Edit a resource on the server
+  delete         Delete resources by filenames, stdin, resources and names, or
+by resources and label selector
+
+Deploy Commands:
+  rollout        Manage the rollout of a resource
+  rolling-update Perform a rolling update of the given ReplicationController
+  scale          Set a new size for a Deployment, ReplicaSet, Replication
+Controller, or Job
+  autoscale      Auto-scale a Deployment, ReplicaSet, or ReplicationController
+
+Cluster Management Commands:
+  certificate    Modify certificate resources.
+  cluster-info   Display cluster info
+  top            Display Resource (CPU/Memory/Storage) usage.
+  cordon         Mark node as unschedulable
+  uncordon       Mark node as schedulable
+  drain          Drain node in preparation for maintenance
+  taint          Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe       Show details of a specific resource or group of resources
+  logs           Print the logs for a container in a pod
+  attach         Attach to a running container
+  exec           Execute a command in a container
+  port-forward   Forward one or more local ports to a pod
+  proxy          Run a proxy to the Kubernetes API server
+  cp             Copy files and directories to and from containers.
+  auth           Inspect authorization
+
+Advanced Commands:
+  apply          Apply a configuration to a resource by filename or stdin
+  patch          Update field(s) of a resource using strategic merge patch
+  replace        Replace a resource by filename or stdin
+  convert        Convert config files between different API versions
+
+Settings Commands:
+  label          Update the labels on a resource
+  annotate       Update the annotations on a resource
+  completion     Output shell completion code for the specified shell (bash or
+zsh)
+
+Other Commands:
+  api-versions   Print the supported API versions on the server, in the form of
+"group/version"
+  config         Modify kubeconfig files
+  help           Help about any command
+  plugin         Runs a command-line plugin
+  version        Print the client and server version information
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all
+commands).
+```
+
+## Helm
+
+The final step is to install helm, following the instructions from 
+[here](https://github.com/kubernetes/helm/blob/master/docs/install.md)
+
+```
+# curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
+# chmod 700 get_helm.sh
+# ./get_helm.sh
+```
