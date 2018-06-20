@@ -38,6 +38,20 @@ LICENSE   README.md  etc. etc.
 (this should result in the contents of this GitHub repository being
  downloaded into the local k8s_jupyter_workshop directory)
 
+### Anaconda python
+
+We need a Python that includes Jupyter. The easiest way to do this is to use
+anaconda python. Install this using
+
+```
+# wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+# chmod a+x Anaconda3-5.2.0-Linux-x86_64.sh
+# ./Anaconda3-5.2.0-Linux-x86_64.sh
+```
+
+This should unpack the installer and ask you where you want to install
+anaconda python. 
+
 ### Docker
 
 Install `docker-ce` using the instructions [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce)
@@ -60,9 +74,46 @@ sub   4096R/F273FCD8 2017-02-22
 # sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
-   stable"
+   edge"
 
 # sudo apt-get update
 # sudo apt-get install docker-ce
 ```
+
+(note we had to use the "edge" repository as a "stable" version for docker-ce
+does not exist yet for Ubuntu 18.04).
+
+To test, run
+
+```
+$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+Digest: sha256:f5233545e43561214ca4891fd1157e1c3c563316ed8e237750d59bde73361e77
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+```
+
+and you should see the output as printed below the command.
+
 
