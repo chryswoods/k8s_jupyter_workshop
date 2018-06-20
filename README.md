@@ -32,7 +32,7 @@ Test
 # git clone https://github.com/chryswoods/k8s_jupyter_workshop
 # cd k8s_jupyter_workshop
 # ls
-LICENSE   README.md
+LICENSE   README.md  test_workshop.py
 ```
 
 (this should result in the contents of this GitHub repository being
