@@ -32,7 +32,7 @@ Test
 # git clone https://github.com/chryswoods/k8s_jupyter_workshop
 # cd k8s_jupyter_workshop
 # ls
-LICENSE   README.md  etc. etc.
+LICENSE   README.md
 ```
 
 (this should result in the contents of this GitHub repository being
@@ -102,10 +102,19 @@ sub   4096R/F273FCD8 2017-02-22
 (note we had to use the "edge" repository as a "stable" version for docker-ce
 does not exist yet for Ubuntu 18.04).
 
-To test, run
+Next, you need to add the current user to the "docker" group. Do this
+using
 
 ```
-$ sudo docker run hello-world
+# sudo usermod -a -G docker $USER
+```
+
+You will now need to log out and in again (actually have to reboot!)
+
+Once you have logged in again, test, by running
+
+```
+$ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 Digest: sha256:f5233545e43561214ca4891fd1157e1c3c563316ed8e237750d59bde73361e77
@@ -322,3 +331,93 @@ The final step is to install helm, following the instructions from
 # chmod 700 get_helm.sh
 # ./get_helm.sh
 ```
+
+Test by trying to run the command `helm`, which should produce the 
+output that is similar to the below
+
+```
+# helm
+
+The Kubernetes package manager
+
+To begin working with Helm, run the 'helm init' command:
+
+	$ helm init
+
+This will install Tiller to your running Kubernetes cluster.
+It will also set up any necessary local configuration.
+
+Common actions from this point include:
+
+- helm search:    search for charts
+- helm fetch:     download a chart to your local directory to view
+- helm install:   upload the chart to Kubernetes
+- helm list:      list releases of charts
+
+Environment:
+  $HELM_HOME          set an alternative location for Helm files. By default, these are stored in ~/.helm
+  $HELM_HOST          set an alternative Tiller host. The format is host:port
+  $HELM_NO_PLUGINS    disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.
+  $TILLER_NAMESPACE   set an alternative Tiller namespace (default "kube-system")
+  $KUBECONFIG         set an alternative Kubernetes configuration file (default "~/.kube/config")
+
+Usage:
+  helm [command]
+
+Available Commands:
+  completion  Generate autocompletions script for the specified shell (bash or zsh)
+  create      create a new chart with the given name
+  delete      given a release name, delete the release from Kubernetes
+  dependency  manage a chart's dependencies
+  fetch       download a chart from a repository and (optionally) unpack it in local directory
+  get         download a named release
+  history     fetch release history
+  home        displays the location of HELM_HOME
+  init        initialize Helm on both client and server
+  inspect     inspect a chart
+  install     install a chart archive
+  lint        examines a chart for possible issues
+  list        list releases
+  package     package a chart directory into a chart archive
+  plugin      add, list, or remove Helm plugins
+  repo        add, list, remove, update, and index chart repositories
+  reset       uninstalls Tiller from a cluster
+  rollback    roll back a release to a previous revision
+  search      search for a keyword in charts
+  serve       start a local http web server
+  status      displays the status of the named release
+  template    locally render templates
+  test        test a release
+  upgrade     upgrade a release
+  verify      verify that a chart at the given path has been signed and is valid
+  version     print the client/server version information
+
+Flags:
+      --debug                     enable verbose output
+  -h, --help                      help for helm
+      --home string               location of your Helm config. Overrides $HELM_HOME (default "/home/chris/.helm")
+      --host string               address of Tiller. Overrides $HELM_HOST
+      --kube-context string       name of the kubeconfig context to use
+      --tiller-namespace string   namespace of Tiller (default "kube-system")
+
+Use "helm [command] --help" for more information about a command.
+```
+
+Once you are happy, you can remove the `get_helm.sh` script, e.g.
+
+```
+# rm get_helm.sh
+```
+
+## Everything installed - let's run a final test
+
+Congratulations - everything should now be installed. Please
+confirm this by running the following command, which is included
+with this repository (and so should have been downloaded by
+the git clone command above)
+
+```
+# ~/anaconda3/bin/python test_workshop.py
+
+```
+
