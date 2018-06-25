@@ -10,7 +10,7 @@ You should be comfortable using the Linux command line, should have a very basic
 The VM needs to have the following installed:
 
 1. Git (so you can download and update this material)
-1. A Python that includes jupyter (we will use anaconda python)
+1. A Python that includes jupyter (we will use the installed python3)
 1. Docker, with a running docker service
 1. The Microsoft "az" command line interface
 1. The "kubectl" interface installed via "az"
@@ -29,34 +29,39 @@ Install
 Test
 
 ```
-# git clone https://github.com/chryswoods/k8s_jupyter_workshop
+# git clone https://github.com/chryswoods/k8s_jupyter_workshop ./woods
 # cd k8s_jupyter_workshop
 # ls
 LICENSE   README.md  test_workshop.py
 ```
 
 (this should result in the contents of this GitHub repository being
- downloaded into the local k8s_jupyter_workshop directory)
+ downloaded into the local directory called ./woods)
 
-### Anaconda python
+### Jupyter
 
 We need a Python that includes Jupyter. The easiest way to do this is to use
-anaconda python. Install this using
+the existing python3 and install jupyter into a virtualenv
+
+First, we need to make sure that virtualenv is installed
 
 ```
-# wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
-# chmod a+x Anaconda3-5.2.0-Linux-x86_64.sh
-# ./Anaconda3-5.2.0-Linux-x86_64.sh
+# sudo apt install virtualenv
 ```
 
-This should unpack the installer and ask you where you want to install
-anaconda python. Accept the default installation directory of 
-`/home/workshops/anaconda3`. Anaconda will install into this directory.
-
-To test, run
+Now install jupyter into the virtualenv in the workshop directory
 
 ```
-# ~/anaconda/bin/jupyter-notebook
+# cd woods
+# virtualenv --python=python3 woods_project
+# source woods_project/bin/activate
+# pip install jupyter
+```
+
+Once jupyter has installed, you can test using
+
+```
+# jupyter-notebook
 ```
 
 This should print out a lot to the screen showing that Jupyter is starting, 
@@ -65,10 +70,10 @@ and then it will launch a web browser with a Jupyter file dialog.
 You can close the web browser and use "CTRL+C" to shut down the 
 Jupyter server.
 
-Once anaconda has installed and you are happy, you can delete the installer
+When you have finished in the virtualenv, you can exit by typing
 
 ```
-# rm Anaconda3-5.2.0-Linux-x86_64.sh
+# deactivate
 ```
 
 ### Docker
@@ -417,7 +422,8 @@ with this repository (and so should have been downloaded by
 the git clone command above)
 
 ```
-# ~/anaconda3/bin/python test_workshop.py
+# source woods_project/bin/activate
+# python test_workshop.py
 
 Tesing git...  PASS
 Testing jupyter...  PASS
