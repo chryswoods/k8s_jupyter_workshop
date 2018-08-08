@@ -32,7 +32,6 @@ Testing az...  PASS
 Testing kubectl...  PASS
 Testing helm...  PASS
 Success. Looks like everything has installed correctly :-)
-(idp) workshops@RSE2018-workshops:~/woods$ 
 ```
 
 If you see the "Success. Looks like everything has installed correctly :-)" message, then you can [move onto the next section](course/part01.md).
