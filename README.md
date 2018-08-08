@@ -16,6 +16,31 @@ The VM needs to have the following installed:
 1. The "kubectl" interface installed via "az"
 1. Helm
 
+## Getting Started
+
+If you are attending a workshop then all of the necessary software should have already be installed in your workshop VM. For the RSE18 workshop you can validate this is the case by typing;
+
+```
+workshops@RSE2018-workshops:~$ cd woods
+workshops@RSE2018-workshops:~/woods$ source conda.sh
+workshops@RSE2018-workshops:~/woods$ conda activate idp
+(idp) workshops@RSE2018-workshops:~/woods$ python test_workshop.py 
+Tesing git...  PASS
+Testing jupyter...  PASS
+Testing docker...  PASS
+Testing az...  PASS
+Testing kubectl...  PASS
+Testing helm...  PASS
+Success. Looks like everything has installed correctly :-)
+(idp) workshops@RSE2018-workshops:~/woods$ 
+```
+
+If you see the "Success. Looks like everything has installed correctly :-)" message, then you can [move onto the next section](course/part01.md).
+
+## Installation Instructions
+
+If you are running this at home on your own computer, then you will need to install the software yourself. The below instructions provide all of the necessary instructions. If you are taking part in a workshop, then all of the software is installed, so you can [move onto the next section](course/part01.md).
+
 Instructions to install and test all of these are below.
 
 ### git
