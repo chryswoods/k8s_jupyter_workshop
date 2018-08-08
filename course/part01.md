@@ -26,5 +26,5 @@ The aim of this workshop is to teach you how to deploy Jupyter notebooks in the 
 
 ***
 
-# [Previous](../README.md) [Up](../README.md) [Next](part2.md)
+# [Previous](../README.md) [Up](../README.md) [Next](part02.md)
 
