@@ -2,7 +2,7 @@
 
 In the [last lesson](part01.md) you were provided with an example workshop. To prepare this workshop to run on the cloud, we first need to find out what is needed to run it on someone else's computer, i.e. we need to create the list of dependencies of this workshop.
 
-As this is a Python 3 workshop, the first dependency is a good Python 3 environment, such as Anaconda Python.
+As this is a Python 3 workshop, the first dependency is a good Python 3 environment.
 
 The next dependency is `qcode` itself. We can install that using the command;
 
