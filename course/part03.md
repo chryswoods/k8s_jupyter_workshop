@@ -101,11 +101,56 @@ ENTRYPOINT ["jupyter-notebook", "--ip=0.0.0.0"]
 USER $NB_USER
 ```
 
+The above Dockerfile starts from a cut-down Linux distribution that contains Python 3.6 (it is Debian-based, and the [Dockerfile](https://github.com/docker-library/python/blob/8350b865d28bc0f4a05111398392ec701d449058/3.6/stretch/slim/Dockerfile) for this can be [viewed here](https://github.com/docker-library/python/blob/8350b865d28bc0f4a05111398392ec701d449058/3.6/stretch/slim/Dockerfile)).
+
+From that starting point, we install git, and then added in the pip commands necessary to install all of the dependencies of our workshop-in-a-workshop. We also add in a normal user account so that the "user" of the container is not root. Next, we copied in the jupyter notebook files into the home directory, and then finally exposed the jupyter notebook port (8888) and then told the container to execute the `jupyter-notebook` program when it starts.
+
+The above Dockerfile is in the current directory. You can build the docker image using the command;
+
 ```
 docker build . -t workshop
-docker run --rm -p 8888:8888 workshop
 ```
 
+This tells docker to build the image described by the Dockerfile in the currect directory, and to then tag (label) the image with the name `workshop`.
+
+Once the container has been built, run the container using the below command;
+
+```
+docker run -p 8888:8888 workshop
+```
+
+The `-p 8888:8888` option tells docker to allow access to port 8888 in the contanier via port 8888 on localhost. When you run the command you should see something similar to this printed to the screen;
+
+```
+(idp) workshops@RSE2018-workshops:~/woods$ docker run -p 8888:8888 workshop
+[I 09:26:18.726 NotebookApp] Writing notebook server cookie secret to /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 09:26:19.042 NotebookApp] Serving notebooks from local directory: /home/jovyan
+[I 09:26:19.043 NotebookApp] The Jupyter Notebook is running at:
+[I 09:26:19.043 NotebookApp] http://(70c77dfc0f6a or 127.0.0.1):8888/?token=fec0de57c2a7fac90e0c46a0f51698b10b083ddc22eb7796
+[I 09:26:19.043 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 09:26:19.043 NotebookApp] No web browser found: could not locate runnable browser.
+[C 09:26:19.043 NotebookApp] 
+    
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://(70c77dfc0f6a or 127.0.0.1):8888/?token=fec0de57c2a7fac90e0c46a0f51698b10b083ddc22eb7796
+```
+
+You will see the login token printed at the bottom (e.g. my token above is `fec0de57c2a7fac90e0c46a0f51698b10b083ddc22eb7796`). Copy the token to your clipboard as you will need it for the next stage.
+
+The docker container is now running, with port 8888 on localhost now routed to port 8888 of the container (which is the port used by the jupyter-notebook process).
+
+Start your webbrowser and connect to the notebook by navigating to `http://127.0.0.1:8888`. You should see a screen that looks something like this;
+
+![images/jupyter03.png](images/jupyter03.png)
+
+Paste the login token you copied above into the "Password or token" box and click "Log in". You should now see your workshop notebooks in the jupyter file browser (as below);
+
+![images/jupyter04.png](images/jupyter04.png)
+
+## Exercise
+
+Work through the notebooks from the workshop-in-a-workshop running in your container. Do they all work?
 
 ***
 
