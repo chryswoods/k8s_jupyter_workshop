@@ -1,0 +1,27 @@
+proxy:
+  secretToken: "32f0d34e18e6da51136a5de768e2e4bc2464c8cc6c650a41fcb5db1b4ffc6469"
+hub:
+  db:
+    type: sqlite-memory
+singleuser:
+  image:
+    name: chryswoodscontainers.azurecr.io/workshop-hub
+    tag: v1
+  storage:
+    type: none
+  memory:
+    limit: 0.5G
+    guarantee: 0.2G
+  cpu:
+    limit: 0.5
+    guarantee: 0.25
+cull:
+  timeout: 2400
+  every: 600
+prePuller:
+  continuous:
+    enabled: true
+auth:
+  type: custom
+  custom:
+    className: tmpauthenticator.TmpAuthenticator
