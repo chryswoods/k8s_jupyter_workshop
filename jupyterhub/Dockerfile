@@ -32,7 +32,8 @@ RUN apt-get update && apt-get -yq dist-upgrade \
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
 
-# Install Tini
+# Install Tini - this is a tiny init system that is useful
+# for containers that need to start many processes
 RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
     echo "1361527f39190a7338a0b434bd8c88ff7233ce7b9a4876f3315c22fce7eca1b0 *tini" | sha256sum -c - && \
     mv tini /usr/local/bin/tini && \
@@ -58,7 +59,8 @@ ADD fix-permissions /usr/local/bin/fix-permissions
 RUN useradd -m -s $SHELL -N -u $NB_UID $NB_USER && \
     fix-permissions $HOME
 
-# Install a mini anaconda
+# Install a mini anaconda for Python 3. This is needed as
+# JupyterHub is best installed from conda
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
     chmod a+x miniconda.sh && \
     ./miniconda.sh -b -p /opt/conda && \
@@ -66,11 +68,20 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     fix-permissions /opt/conda && \
     rm miniconda.sh
 
-# Configure container startup
+# Configure container startup. This starts the tini init system
+# telling it to run the start_notebook.sh as the primary process.
+# This is a script provided by JupyterHub that will start different
+# processes depending on whether this is the hub or a notebook
 ENTRYPOINT ["tini", "--"]
 CMD ["start-notebook.sh"]
+
+# Make sure that the jupyter notebook port is accessible from
+# outside the container
 EXPOSE 8888
 
+# Now copy in all of the files that are needed to run JupyterHub
+# This includes jupyter-notebook_config.py that is used to
+# configure the jupyterhub server
 COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
@@ -86,13 +97,19 @@ RUN conda config --system --prepend channels conda-forge && \
     conda config --system --set auto_update_conda false && \
     conda config --system --set show_channel_urls true && \
     conda install --quiet --yes 'notebook=5.2.*' 'jupyterhub=0.8.*' 'jupyterlab=0.31.*'
+
+# Now install the dependencies of our workshop
 RUN pip install qrcode[pil] && \
     pip install git+git://github.com/ojii/pymaging.git#egg=pymaging && \
     pip install git+git://github.com/ojii/pymaging-png.git#pymaging-png
+
+# Now installed tmpauthenticator. This is a module that allows anybody
+# to log into this jupyterhub using a hidden URL
 RUN pip install jupyterhub-tmpauthenticator
 
-# Reinstall an older version of tornado as tornado 5 
-# and clean up after conda, including clearing the cache
+# Reinstall an older version of tornado as tornado 5 doesn't work
+# with the current version of jupyterhub
+# Also clean up after conda, including clearing the cache
 RUN conda install tornado=4.5.3 && \
     conda clean -tipsy && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
